@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Bug;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -40,11 +40,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the bug list with {@code bugs}.
-     * {@code bugs} must not contain duplicate bugs.
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
      */
-    public void setPersons(List<Bug> bugs) {
-        this.persons.setPersons(bugs);
+    public void setPersons(List<Person> persons) {
+        this.persons.setPersons(persons);
     }
 
     /**
@@ -56,40 +56,40 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
     }
 
-    //// bug-level operations
+    //// person-level operations
 
     /**
-     * Returns true if a bug with the same identity as {@code bug} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    public boolean hasPerson(Bug bug) {
-        requireNonNull(bug);
-        return persons.contains(bug);
+    public boolean hasPerson(Person person) {
+        requireNonNull(person);
+        return persons.contains(person);
     }
 
     /**
-     * Adds a bug to the address book.
-     * The bug must not already exist in the address book.
+     * Adds a person to the address book.
+     * The person must not already exist in the address book.
      */
-    public void addPerson(Bug p) {
+    public void addPerson(Person p) {
         persons.add(p);
     }
 
     /**
-     * Replaces the given bug {@code target} in the list with {@code editedBug}.
+     * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
-     * The bug identity of {@code editedBug} must not be the same as another existing bug in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setPerson(Bug target, Bug editedBug) {
-        requireNonNull(editedBug);
+    public void setPerson(Person target, Person editedPerson) {
+        requireNonNull(editedPerson);
 
-        persons.setPerson(target, editedBug);
+        persons.setPerson(target, editedPerson);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Bug key) {
+    public void removePerson(Person key) {
         persons.remove(key);
     }
 
@@ -102,7 +102,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Bug> getPersonList() {
+    public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
 

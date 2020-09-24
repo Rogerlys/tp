@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Bug;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -45,11 +45,11 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two bugs with the same identity fields
-        Bug editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        // Two persons with the same identity fields
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Bug> newBugs = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newBugs);
+        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
+        AddressBookStub newData = new AddressBookStub(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -73,7 +73,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Bug editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
@@ -84,18 +84,18 @@ public class AddressBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose bugs list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Bug> bugs = FXCollections.observableArrayList();
+        private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Bug> bugs) {
-            this.bugs.setAll(bugs);
+        AddressBookStub(Collection<Person> persons) {
+            this.persons.setAll(persons);
         }
 
         @Override
-        public ObservableList<Bug> getPersonList() {
-            return bugs;
+        public ObservableList<Person> getPersonList() {
+            return persons;
         }
     }
 
