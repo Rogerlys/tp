@@ -14,7 +14,7 @@ import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing bug in the description book.
+ * Edits the details of an existing bug in the address book.
  */
 public class EditCommand extends Command {
 
@@ -35,7 +35,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Bug: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This bug already exists in the description book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This bug already exists in the address book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -83,10 +83,10 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(bugToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(bugToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(bugToEdit.getEmail());
-        Description updatedDescription = editPersonDescriptor.getDescription().orElse(bugToEdit.getDescription());
+        address updatedAddress = editPersonDescriptor.getAddress().orElse(bugToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(bugToEdit.getTags());
 
-        return new Bug(updatedName, updatedPhone, updatedEmail, updatedDescription, updatedTags);
+        return new Bug(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override
@@ -115,7 +115,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Description description;
+        private address address;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -128,7 +128,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setDescription(toCopy.description);
+            setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
 
@@ -136,7 +136,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, description, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
         }
 
         public void setName(Name name) {
@@ -163,12 +163,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setDescription(Description description) {
-            this.description = description;
+        public void setAddress(address address) {
+            this.address = address;
         }
 
-        public Optional<Description> getDescription() {
-            return Optional.ofNullable(description);
+        public Optional<address> getAddress() {
+            return Optional.ofNullable(address);
         }
 
         /**
@@ -206,7 +206,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getDescription().equals(e.getDescription())
+                    && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags());
         }
     }

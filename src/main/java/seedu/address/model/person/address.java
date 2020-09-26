@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Bug's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
-public class Description {
+public class address {
 
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
 
@@ -20,11 +20,11 @@ public class Description {
     public final String value;
 
     /**
-     * Constructs an {@code Description}.
+     * Constructs an {@code address}.
      *
      * @param address A valid address.
      */
-    public Description(String address) {
+    public address(String address) {
         requireNonNull(address);
         checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
         value = address;
@@ -45,8 +45,8 @@ public class Description {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Description // instanceof handles nulls
-                && value.equals(((Description) other).value)); // state check
+                || (other instanceof address // instanceof handles nulls
+                && value.equals(((address) other).value)); // state check
     }
 
     @Override

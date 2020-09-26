@@ -38,10 +38,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Description description = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Bug bug = new Bug(name, phone, email, description, tagList);
+        Bug bug = new Bug(name, phone, email, address, tagList);
 
         return new AddCommand(bug);
     }

@@ -50,7 +50,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getDescription().value;
+        address = source.getAddress().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -92,15 +92,15 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, seedu.address.model.person.address.class.getSimpleName()));
         }
-        if (!Description.isValidAddress(address)) {
-            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
+        if (!seedu.address.model.person.address.isValidAddress(address)) {
+            throw new IllegalValueException(seedu.address.model.person.address.MESSAGE_CONSTRAINTS);
         }
-        final Description modelDescription = new Description(address);
+        final seedu.address.model.person.address modelAddress = new address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Bug(modelName, modelPhone, modelEmail, modelDescription, modelTags);
+        return new Bug(modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
 }

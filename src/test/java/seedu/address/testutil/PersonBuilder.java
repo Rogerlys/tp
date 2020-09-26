@@ -21,7 +21,7 @@ public class PersonBuilder {
     private Name name;
     private Phone phone;
     private Email email;
-    private Description description;
+    private address address;
     private Set<Tag> tags;
 
     /**
@@ -31,7 +31,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        description = new Description(DEFAULT_ADDRESS);
+        address = new address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
     }
 
@@ -42,7 +42,7 @@ public class PersonBuilder {
         name = bugToCopy.getName();
         phone = bugToCopy.getPhone();
         email = bugToCopy.getEmail();
-        description = bugToCopy.getDescription();
+        address = bugToCopy.getAddress();
         tags = new HashSet<>(bugToCopy.getTags());
     }
 
@@ -63,10 +63,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Description} of the {@code Bug} that we are building.
+     * Sets the {@code address} of the {@code Bug} that we are building.
      */
     public PersonBuilder withAddress(String address) {
-        this.description = new Description(address);
+        this.address = new address(address);
         return this;
     }
 
@@ -87,7 +87,7 @@ public class PersonBuilder {
     }
 
     public Bug build() {
-        return new Bug(name, phone, email, description, tags);
+        return new Bug(name, phone, email, address, tags);
     }
 
 }
