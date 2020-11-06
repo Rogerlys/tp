@@ -146,7 +146,7 @@ Given below is sequence diagram for the creation of the BugListPanes:
 
 <img src= "images/KanbanBoardUI.png" width = "400">
 
-With the implementation of kanban view window, command such as delete, move and edit that depend on the index would not work as expected. This is because, the Kanban view seperates the bugs and place then in different columns. As such, it would be essential to allow the users to execute these commands in the kanban view as we implement the new window. This can be done by allowing the user to chose which column would be affected by these commands.
+With the implementation of kanban view window, command such as delete, move and edit that depend on the index would not work as expected. This is because, the Kanban view seperates the bugs and place then in different columns. As such, the index that is associated with each bug will not be accurate as the index is dependent on each column. As such, it would be essential to allow the users to execute these commands in the kanban view as we implement the new window. This can be done by allowing the user to chose which column would be affected by these commands.
 
 This can be done by adding the following classes:
 

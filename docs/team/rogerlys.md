@@ -30,10 +30,10 @@ KanBug Tracker is a lightweight, easy to use bug management tool that aims to em
 
 * **Other contributions:**
     * **Project management**:
-        * As the in charge of code quality, I mointored and ensure that the code written by the team is in accordance with the module. To achieve this I would inform teammates when their code violates any of the coding stardard set by the module.
+        * As the in-charge of code quality, I mointored and ensure that the code written by the team is in accordance with the module. To achieve this I would inform teammates when their code violates any of the coding stardard set by the module.
         * Created a jar file and release on github whenever a milestone is reached.
-        * Ensured that every member of the team has completed their agenda before the deadline. 
-        * Provided alternatives implementation idead for key features.
+        * Ensured that every member of the team has completed their agenda before the hard deadline that is set for release. 
+        * Provide alternative implementation ideas for key features.
     
     * **Documentation**:
         * Wrote sections on `add` and `delete` commands in KanBug Tracker's User Guide.
