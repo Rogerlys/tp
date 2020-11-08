@@ -38,6 +38,8 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    private boolean isKanbanView = true;
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -72,12 +74,11 @@ public class MainWindow extends UiPart<Stage> {
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
+        helpWindow = new HelpWindow();
+
         setAccelerators();
 
-        helpWindow = new HelpWindow();
-        bugListPanelPlaceholder.setVisible(false);
-        bugListPanelPlaceholder.setManaged(false);
-
+        toKanbanView();
     }
 
     public Stage getPrimaryStage() {
@@ -88,8 +89,17 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
             if (KeyCode.ESCAPE == event.getCode()) {
                 handleExit();
+                logger.info("Key pressed: ESCAPE in primary stage");
             }
         });
+
+        helpWindow.getRoot().addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
+            if (KeyCode.ESCAPE == event.getCode()) {
+                helpWindow.getRoot().close();
+                logger.info("Key pressed: ESCAPE in help window");
+            }
+        });
+
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
@@ -183,23 +193,33 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    @FXML
-    private void handleBoard() {
-        if (bugListPanelPlaceholder.isManaged()) {
-            kanbanPanelPlaceholder.setVisible(true);
-            kanbanPanelPlaceholder.setManaged(true);
-            bugListPanelPlaceholder.setVisible(false);
-            bugListPanelPlaceholder.setManaged(false);
+    /**
+     * Switch the view.
+     */
+    private void handleSwitch() {
+        if (isKanbanView) {
+            toListView();
         } else {
-            kanbanPanelPlaceholder.setVisible(false);
-            kanbanPanelPlaceholder.setManaged(false);
-            bugListPanelPlaceholder.setVisible(true);
-            bugListPanelPlaceholder.setManaged(true);
+            toKanbanView();
         }
     }
 
-    public BugListPanel getBugListPanel() {
-        return bugListPanel;
+    private void toKanbanView() {
+        isKanbanView = true;
+
+        kanbanPanelPlaceholder.setVisible(true);
+        kanbanPanelPlaceholder.setManaged(true);
+        bugListPanelPlaceholder.setVisible(false);
+        bugListPanelPlaceholder.setManaged(false);
+    }
+
+    private void toListView() {
+        isKanbanView = false;
+
+        kanbanPanelPlaceholder.setVisible(false);
+        kanbanPanelPlaceholder.setManaged(false);
+        bugListPanelPlaceholder.setVisible(true);
+        bugListPanelPlaceholder.setManaged(true);
     }
 
     /**
@@ -213,7 +233,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            if (commandResult.isHelp()) {
                 handleHelp();
             }
 
@@ -221,8 +241,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isShowBoard()) {
-                handleBoard();
+            if (commandResult.isSwitch()) {
+                handleSwitch();
             }
 
             return commandResult;
